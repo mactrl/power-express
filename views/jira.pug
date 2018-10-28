@@ -1,0 +1,28 @@
+
+-console.log('user is '+ JSON.stringify(users));
+html
+    head
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css")
+        
+    body
+        table
+            form(action="/" method="GET")
+                tr
+                    th 
+                        input(type="submit" value="all done" formaction="/deleteAllTask" formmethod="GET")
+                    th 
+                        input(type="text" name="activity" placeholder="enter an activity")
+                    th 
+                        input(type="submit" value="add" formaction='/addTask' formmethod='POST')
+            //-!users.length && div No Activity 
+            -if(users.length) {
+                -users.forEach(function(user){
+                tr
+                    td id
+                    td #{user.name}
+                    td 
+                        a(href=`/deleteTask?delete=${user.name}`)
+                            button(type="button") Delete
+                -})
+            -}
+        script function load(user) { console.log("inside delete"+user); var xhttp = new XMLHttpRequest(); xhttp.open("GET", `/deleteTask?delete=${user}`, true); xhttp.send();}
